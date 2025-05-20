@@ -85,16 +85,14 @@
     </style>
 </head>
 <body>
-    <h1>Пенсионный калькулятор</h1>
-    
-    <div class="calculator">
-        <div class="form-group">
+     <h1>Пенсионный калькулятор</h1>
+    <form id="pensionForm">
+        <div>
             <label for="age">Ваш возраст:</label>
-            <input type="number" id="age" min="0" max="120" placeholder="Введите ваш возраст">
-            <div id="ageError" class="error"></div>
+            <input type="number" id="age" name="age" min="0" required>
         </div>
         
-        <div class="form-group">
+        <div>
             <label>Ваш пол:</label>
             <div class="radio-group">
                 <div class="radio-option">
@@ -108,60 +106,45 @@
             </div>
         </div>
         
-        <button id="calculateBtn">Рассчитать</button>
+        <button type="button" id="calculateBtn">Рассчитать</button>
         
-        <div class="form-group">
+        <div>
             <label for="result">Результат:</label>
             <textarea id="result" readonly></textarea>
         </div>
-    </div>
+    </form>
 
     <script>
-        'use strict';
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const calculateBtn = document.getElementById('calculateBtn');
+        "use strict";
+        document.getElementById('calculateBtn').addEventListener('click', function() {
             const ageInput = document.getElementById('age');
+            const age = parseInt(ageInput.value);
+            const gender = document.querySelector('input[name="gender"]:checked').value;
             const resultTextarea = document.getElementById('result');
-            const ageError = document.getElementById('ageError');
             
-            calculateBtn.addEventListener('click', function() {
-                // Сброс сообщения об ошибке
-                ageError.textContent = '';
-                
-                // Получаем значения из формы
-                const age = parseInt(ageInput.value);
-                const gender = document.querySelector('input[name="gender"]:checked').value;
-                
-                // Валидация ввода
-                if (isNaN(age) || age < 0) {
-                    ageError.textContent = 'Пожалуйста, введите корректный возраст';
-                    return;
-                }
-                
-                // Определение пенсионного статуса
-                let message = calculatePensionStatus(age, gender);
-                resultTextarea.value = message;
-            });
+            let message = "Да кто ты такой?";
             
-            function calculatePensionStatus(age, gender) {
-                if (age >= 0 && age <= 17) {
-                    return "Вам работать ещё рано — учитесь";
+            if (age >= 0 && age <= 17) {
+                message = "Вам работать ещё рано — учитесь";
+            } else if (gender === 'male') {
+                if (age >= 18 && age <= 59) {
+                    message = "Вам ещё работать и работать";
+                } else if (age >= 60 && age <= 64) {
+                    message = "Скоро пенсия!";
+                } else if (age >= 65) {
+                    message = "Вам пора на пенсию";
                 }
-                
-                if (gender === 'male') {
-                    if (age >= 18 && age <= 59) return "Вам ещё работать и работать";
-                    if (age >= 60 && age <= 64) return "Скоро пенсия!";
-                    if (age >= 65) return "Вам пора на пенсию";
-                } 
-                else if (gender === 'female') {
-                    if (age >= 18 && age <= 54) return "Вам ещё работать и работать";
-                    if (age >= 55 && age <= 59) return "Скоро пенсия!";
-                    if (age >= 60) return "Вам пора на пенсию";
+            } else if (gender === 'female') {
+                if (age >= 18 && age <= 54) {
+                    message = "Вам ещё работать и работать";
+                } else if (age >= 55 && age <= 59) {
+                    message = "Скоро пенсия!";
+                } else if (age >= 60) {
+                    message = "Вам пора на пенсию";
                 }
-                
-                return "Да кто ты такой?";
             }
+            
+            resultTextarea.value = message;
         });
     </script>
 </body>
