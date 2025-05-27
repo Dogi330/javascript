@@ -11,20 +11,15 @@
         }
     </style>
 </head>
-
 <body>
     <div id="container"></div>
-
     <script>
         'use strict';
 
         function createTree(container, data) {
-
             function createTreeDom(obj) {
-
                 if (!Object.keys(obj).length) 
                     return null;
-
                 let ul = document.createElement('ul');
                 for (let key in obj) {
                     let li = document.createElement('li');
@@ -36,14 +31,11 @@
 
                     ul.appendChild(li);
                 }
-
                 return ul;
             }
-
             container.innerHTML = '';
             container.appendChild(createTreeDom(data));
         }
-
         let data = {
             "Рыбы": {
                 "форель": {},
@@ -65,8 +57,6 @@
             let container = document.getElementById('container');
             createTree(container, data);
         });
-
     </script>
 </body>
-
 </html>
