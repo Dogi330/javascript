@@ -16,7 +16,7 @@
         let assert = chai.assert;
     </script>
 </head>
-
+    
 <body>
     <script type="module">
         import {
@@ -46,6 +46,7 @@
 
         });
 
+        
         describe("normalizeUrl", function () {
 
             it("normalizeUrl('yandex.ru') => 'https://yandex.ru'", function () {
@@ -65,7 +66,6 @@
             });
 
         });
-
         describe("checkSpam", function () {
 
             it("checkSpam('_XxX_') => true", function () {
@@ -81,7 +81,6 @@
             });
 
         });
-
         describe("truncate", function () {
 
             it("truncate('Мама мыла раму.', 100) => 'Мама мыла раму.'", function () {
@@ -93,7 +92,6 @@
             });
 
         });
-
         describe("camelize", function () {
 
             it("camelize('var-test-text') => 'varTestText'", function () {
@@ -113,7 +111,6 @@
             });
 
         });
-
         describe("arrReverseSorted", function () {
 
             it("arrReverseSorted([1, 3, 22]) => [22, 3, 1]", function () {
@@ -131,16 +128,13 @@
             it("unique(['a', 'b', 'c', 'c']) => ['a', 'b', 'c']", function () {
                 assert.deepEqual(unique(['a', 'b', 'c', 'c']), ['a', 'b', 'c']);
             });
-
         });
 
     </script>
-
     <div id="mocha"></div>
 
     <script>
         window.onload = () => mocha.run();
     </script>
 </body>
-
 </html>
